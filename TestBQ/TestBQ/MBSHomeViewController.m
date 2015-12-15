@@ -10,7 +10,9 @@
 #import <DropboxSDK/DropboxSDK.h>
 
 
-@interface MBSHomeViewController ()
+@interface MBSHomeViewController ()<DBRestClientDelegate>
+
+@property (nonatomic, strong) DBRestClient *restClient;
 
 @end
 
@@ -22,6 +24,14 @@
     
     if (![[DBSession sharedSession] isLinked]) {
         [[DBSession sharedSession] linkFromController:self];
+        
+        
+    } else {
+        
+        self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        self.restClient.delegate = self;
+        
+        [self.restClient loadMetadata:@"/"];
     }
 }
 
@@ -30,14 +40,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - DBRestClientDelegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata {
+    if (metadata.isDirectory) {
+        NSLog(@"Folder '%@' contains:", metadata.path);
+        for (DBMetadata *file in metadata.contents) {
+            NSLog(@"	%@", file.filename);
+           
+            if ([file.filename hasSuffix:@".epub"]) {
+                
+                NSLog(@"EBOOK: %@",file.filename);
+            }
+        }
+    }
 }
-*/
+
+- (void)restClient:(DBRestClient *)client
+loadMetadataFailedWithError:(NSError *)error {
+    NSLog(@"Error loading metadata: %@", error);
+}
 
 @end
