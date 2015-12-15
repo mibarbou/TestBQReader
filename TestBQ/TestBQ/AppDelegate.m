@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "MBSHomeViewController.h"
+#import <DropboxSDK/DropboxSDK.h>
+
 
 @interface AppDelegate ()
 
@@ -18,6 +21,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    DBSession *dbSession = [[DBSession alloc]
+                            initWithAppKey:@"9dbvrzgixmbzax1"
+                            appSecret:@"z5q68mn0cm2i7vo"
+                            root:kDBRootDropbox]; // either kDBRootAppFolder or kDBRootDropbox
+    [DBSession setSharedSession:dbSession];
+    
+    MBSHomeViewController *homeVC = [[MBSHomeViewController alloc]init];
+    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:homeVC];
+    
+    self.window.rootViewController = navVC;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -43,6 +58,19 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
+  sourceApplication:(NSString *)source annotation:(id)annotation {
+    if ([[DBSession sharedSession] handleOpenURL:url]) {
+        if ([[DBSession sharedSession] isLinked]) {
+            NSLog(@"App linked successfully!");
+            // At this point you can start making API calls
+        }
+        return YES;
+    }
+    // Add whatever other url handling code your app requires here
+    return NO;
 }
 
 @end

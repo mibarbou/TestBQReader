@@ -11,6 +11,11 @@
 		D06157A51C208A6300C46E3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D06157A41C208A6300C46E3C /* AppDelegate.m */; };
 		D06157A71C208A6300C46E3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D06157A61C208A6300C46E3C /* Assets.xcassets */; };
 		D06157AA1C208A6300C46E3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D06157A81C208A6300C46E3C /* LaunchScreen.storyboard */; };
+		D0765B8D1C20B1F800EDCB58 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0765B8C1C20B1F800EDCB58 /* DropboxSDK.framework */; };
+		D0765B8F1C20B22000EDCB58 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0765B8E1C20B22000EDCB58 /* Security.framework */; };
+		D0765B911C20B23500EDCB58 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0765B901C20B23500EDCB58 /* QuartzCore.framework */; };
+		D0765B961C20B2CC00EDCB58 /* MBSHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0765B941C20B2CC00EDCB58 /* MBSHomeViewController.m */; };
+		D0765B971C20B2CC00EDCB58 /* MBSHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0765B951C20B2CC00EDCB58 /* MBSHomeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +26,12 @@
 		D06157A61C208A6300C46E3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D06157A91C208A6300C46E3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D06157AB1C208A6300C46E3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0765B8C1C20B1F800EDCB58 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = TestBQ/DropboxSDK.framework; sourceTree = "<group>"; };
+		D0765B8E1C20B22000EDCB58 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D0765B901C20B23500EDCB58 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D0765B931C20B2CC00EDCB58 /* MBSHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSHomeViewController.h; sourceTree = "<group>"; };
+		D0765B941C20B2CC00EDCB58 /* MBSHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSHomeViewController.m; sourceTree = "<group>"; };
+		D0765B951C20B2CC00EDCB58 /* MBSHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MBSHomeViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +39,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0765B911C20B23500EDCB58 /* QuartzCore.framework in Frameworks */,
+				D0765B8F1C20B22000EDCB58 /* Security.framework in Frameworks */,
+				D0765B8D1C20B1F800EDCB58 /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +51,9 @@
 		D06157941C208A6300C46E3C = {
 			isa = PBXGroup;
 			children = (
+				D0765B901C20B23500EDCB58 /* QuartzCore.framework */,
+				D0765B8C1C20B1F800EDCB58 /* DropboxSDK.framework */,
+				D0765B8E1C20B22000EDCB58 /* Security.framework */,
 				D061579F1C208A6300C46E3C /* TestBQ */,
 				D061579E1C208A6300C46E3C /* Products */,
 			);
@@ -53,6 +70,7 @@
 		D061579F1C208A6300C46E3C /* TestBQ */ = {
 			isa = PBXGroup;
 			children = (
+				D0765B921C20B29800EDCB58 /* Controllers */,
 				D06157A31C208A6300C46E3C /* AppDelegate.h */,
 				D06157A41C208A6300C46E3C /* AppDelegate.m */,
 				D06157A61C208A6300C46E3C /* Assets.xcassets */,
@@ -69,6 +87,16 @@
 				D06157A11C208A6300C46E3C /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D0765B921C20B29800EDCB58 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D0765B931C20B2CC00EDCB58 /* MBSHomeViewController.h */,
+				D0765B941C20B2CC00EDCB58 /* MBSHomeViewController.m */,
+				D0765B951C20B2CC00EDCB58 /* MBSHomeViewController.xib */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,6 +130,7 @@
 				TargetAttributes = {
 					D061579C1C208A6300C46E3C = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = C3XJQ6RL5C;
 					};
 				};
 			};
@@ -130,6 +159,7 @@
 			files = (
 				D06157A71C208A6300C46E3C /* Assets.xcassets in Resources */,
 				D06157AA1C208A6300C46E3C /* LaunchScreen.storyboard in Resources */,
+				D0765B971C20B2CC00EDCB58 /* MBSHomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +172,7 @@
 			files = (
 				D06157A51C208A6300C46E3C /* AppDelegate.m in Sources */,
 				D06157A21C208A6300C46E3C /* main.m in Sources */,
+				D0765B961C20B2CC00EDCB58 /* MBSHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +276,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TestBQ",
+				);
 				INFOPLIST_FILE = TestBQ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mbs.TestBQ;
@@ -256,6 +293,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TestBQ",
+				);
 				INFOPLIST_FILE = TestBQ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mbs.TestBQ;
@@ -282,6 +325,7 @@
 				D06157B01C208A6300C46E3C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
