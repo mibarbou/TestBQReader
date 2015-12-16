@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1267E6ACCBF7F1A37E38F52F /* libPods-TestBQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E94A445044C49974D2EEE98B /* libPods-TestBQ.a */; };
+		D01D1FDE1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D01D1FDC1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.m */; };
+		D01D1FDF1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01D1FDD1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.xib */; };
+		D01D1FE31C21AF5500DB6B64 /* MBSBooksListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D01D1FE11C21AF5500DB6B64 /* MBSBooksListViewController.m */; };
+		D01D1FE41C21AF5500DB6B64 /* MBSBooksListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01D1FE21C21AF5500DB6B64 /* MBSBooksListViewController.xib */; };
 		D06157A21C208A6300C46E3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D06157A11C208A6300C46E3C /* main.m */; };
 		D06157A51C208A6300C46E3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D06157A41C208A6300C46E3C /* AppDelegate.m */; };
 		D06157A71C208A6300C46E3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D06157A61C208A6300C46E3C /* Assets.xcassets */; };
@@ -19,6 +24,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A86F5DF42963FB91A233C585 /* Pods-TestBQ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestBQ.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestBQ/Pods-TestBQ.release.xcconfig"; sourceTree = "<group>"; };
+		D01D1FDB1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSBooksGridViewControllerCollectionViewController.h; sourceTree = "<group>"; };
+		D01D1FDC1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSBooksGridViewControllerCollectionViewController.m; sourceTree = "<group>"; };
+		D01D1FDD1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MBSBooksGridViewControllerCollectionViewController.xib; sourceTree = "<group>"; };
+		D01D1FE01C21AF5500DB6B64 /* MBSBooksListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSBooksListViewController.h; sourceTree = "<group>"; };
+		D01D1FE11C21AF5500DB6B64 /* MBSBooksListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSBooksListViewController.m; sourceTree = "<group>"; };
+		D01D1FE21C21AF5500DB6B64 /* MBSBooksListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MBSBooksListViewController.xib; sourceTree = "<group>"; };
 		D061579D1C208A6300C46E3C /* TestBQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestBQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D06157A11C208A6300C46E3C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D06157A31C208A6300C46E3C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -32,6 +44,8 @@
 		D0765B931C20B2CC00EDCB58 /* MBSHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSHomeViewController.h; sourceTree = "<group>"; };
 		D0765B941C20B2CC00EDCB58 /* MBSHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSHomeViewController.m; sourceTree = "<group>"; };
 		D0765B951C20B2CC00EDCB58 /* MBSHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MBSHomeViewController.xib; sourceTree = "<group>"; };
+		E94A445044C49974D2EEE98B /* libPods-TestBQ.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestBQ.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F02A076BED5CA945693076FE /* Pods-TestBQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestBQ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestBQ/Pods-TestBQ.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,12 +56,30 @@
 				D0765B911C20B23500EDCB58 /* QuartzCore.framework in Frameworks */,
 				D0765B8F1C20B22000EDCB58 /* Security.framework in Frameworks */,
 				D0765B8D1C20B1F800EDCB58 /* DropboxSDK.framework in Frameworks */,
+				1267E6ACCBF7F1A37E38F52F /* libPods-TestBQ.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55FFA2D82D80C76494628C7D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E94A445044C49974D2EEE98B /* libPods-TestBQ.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F6E324129C4A3F305D06AA1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F02A076BED5CA945693076FE /* Pods-TestBQ.debug.xcconfig */,
+				A86F5DF42963FB91A233C585 /* Pods-TestBQ.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D06157941C208A6300C46E3C = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +88,8 @@
 				D0765B8E1C20B22000EDCB58 /* Security.framework */,
 				D061579F1C208A6300C46E3C /* TestBQ */,
 				D061579E1C208A6300C46E3C /* Products */,
+				6F6E324129C4A3F305D06AA1 /* Pods */,
+				55FFA2D82D80C76494628C7D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +129,12 @@
 				D0765B931C20B2CC00EDCB58 /* MBSHomeViewController.h */,
 				D0765B941C20B2CC00EDCB58 /* MBSHomeViewController.m */,
 				D0765B951C20B2CC00EDCB58 /* MBSHomeViewController.xib */,
+				D01D1FDB1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.h */,
+				D01D1FDC1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.m */,
+				D01D1FDD1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.xib */,
+				D01D1FE01C21AF5500DB6B64 /* MBSBooksListViewController.h */,
+				D01D1FE11C21AF5500DB6B64 /* MBSBooksListViewController.m */,
+				D01D1FE21C21AF5500DB6B64 /* MBSBooksListViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -106,9 +146,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D06157AE1C208A6300C46E3C /* Build configuration list for PBXNativeTarget "TestBQ" */;
 			buildPhases = (
+				F4D3D61B7C61CE58BFE7C2C2 /* Check Pods Manifest.lock */,
 				D06157991C208A6300C46E3C /* Sources */,
 				D061579A1C208A6300C46E3C /* Frameworks */,
 				D061579B1C208A6300C46E3C /* Resources */,
+				40173043CF9C1CE7709C0140 /* Embed Pods Frameworks */,
+				4E6C60D54894D832F6E1D47C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -158,12 +201,62 @@
 			buildActionMask = 2147483647;
 			files = (
 				D06157A71C208A6300C46E3C /* Assets.xcassets in Resources */,
+				D01D1FE41C21AF5500DB6B64 /* MBSBooksListViewController.xib in Resources */,
 				D06157AA1C208A6300C46E3C /* LaunchScreen.storyboard in Resources */,
 				D0765B971C20B2CC00EDCB58 /* MBSHomeViewController.xib in Resources */,
+				D01D1FDF1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		40173043CF9C1CE7709C0140 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TestBQ/Pods-TestBQ-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4E6C60D54894D832F6E1D47C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TestBQ/Pods-TestBQ-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4D3D61B7C61CE58BFE7C2C2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D06157991C208A6300C46E3C /* Sources */ = {
@@ -173,6 +266,8 @@
 				D06157A51C208A6300C46E3C /* AppDelegate.m in Sources */,
 				D06157A21C208A6300C46E3C /* main.m in Sources */,
 				D0765B961C20B2CC00EDCB58 /* MBSHomeViewController.m in Sources */,
+				D01D1FDE1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.m in Sources */,
+				D01D1FE31C21AF5500DB6B64 /* MBSBooksListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +369,7 @@
 		};
 		D06157AF1C208A6300C46E3C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F02A076BED5CA945693076FE /* Pods-TestBQ.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -291,6 +387,7 @@
 		};
 		D06157B01C208A6300C46E3C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A86F5DF42963FB91A233C585 /* Pods-TestBQ.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

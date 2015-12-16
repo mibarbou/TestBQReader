@@ -66,6 +66,9 @@
         if ([[DBSession sharedSession] isLinked]) {
             NSLog(@"App linked successfully!");
             // At this point you can start making API calls
+            
+            NSNotification *notification = [NSNotification notificationWithName:@"DBLinkedNotification" object:nil];
+            [[NSNotificationCenter defaultCenter]postNotification:notification];
         }
         return YES;
     }

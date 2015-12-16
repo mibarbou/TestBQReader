@@ -1,0 +1,16 @@
+PODS:
+  - KFEpubKit (0.0.6):
+    - KissXML
+    - SSZipArchive
+  - KissXML (5.0)
+  - SSZipArchive (1.0.1)
+
+DEPENDENCIES:
+  - KFEpubKit
+
+SPEC CHECKSUMS:
+  KFEpubKit: 945938610590a08cd6301370fb25da837d535292
+  KissXML: ce643413d618ad69886d0d43c3792b7dedfe476e
+  SSZipArchive: 5f30a0af2cb3d48c0ff83b1e18029f7041ac3c38
+
+COCOAPODS: 0.39.0
