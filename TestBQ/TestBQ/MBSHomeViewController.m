@@ -17,6 +17,11 @@
 @property (nonatomic, strong) DBRestClient *restClient;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
+@property (strong, nonatomic) MBSBooksGridViewControllerCollectionViewController *gridViewController;
+@property (strong, nonatomic) MBSBooksListViewController *listViewController;
+
+@property (strong, nonatomic) NSMutableArray *books;
+
 
 
 @end
@@ -29,6 +34,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(startDBRestClient) name:@"DBLinkedNotification" object:nil];
     
     [self startDBRestClient];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +50,11 @@
 #pragma mark - DBRestClientDelegate
 
 - (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata {
+    
+    self.books = [NSMutableArray array];
+    
     if (metadata.isDirectory) {
+        
 //        NSLog(@"Folder '%@' contains:", metadata.path);
         for (DBMetadata *file in metadata.contents) {
 //            NSLog(@"	%@", file.filename);
@@ -58,14 +68,20 @@
                 path = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/",file.filename]];
                 
                 
-                [self.restClient loadFile:file.path intoPath:path];
+//                [self.restClient loadFile:file.path intoPath:path];
                 
                 
                 NSLog(@"hash: %@",file.icon);
+                
+                [self.books addObject:file.filename];
                
             }
         }
     }
+    
+    [self setupListViewController];
+
+    
 }
 
 - (void)restClient:(DBRestClient *)client
@@ -97,5 +113,19 @@ loadMetadataFailedWithError:(NSError *)error {
         [self.restClient loadMetadata:@"/"];
     }
 }
+
+- (void)setupListViewController {
+    
+    self.listViewController = [[MBSBooksListViewController alloc]initWithBooks:self.books];
+    
+    [self addChildViewController:self.listViewController];
+    self.listViewController.view.frame = self.contentView.bounds;
+    [self.contentView addSubview:self.listViewController.view];
+    
+    [self.listViewController didMoveToParentViewController:self];
+    
+    
+}
+
 
 @end

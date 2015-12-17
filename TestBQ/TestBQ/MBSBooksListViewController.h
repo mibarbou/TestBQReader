@@ -10,4 +10,6 @@
 
 @interface MBSBooksListViewController : UITableViewController
 
+- (id)initWithBooks:(NSMutableArray *)books;
+
 @end

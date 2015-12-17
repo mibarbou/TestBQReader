@@ -10,11 +10,22 @@
 
 @interface MBSBooksListViewController ()
 
-@property (strong, nonatomic) NSArray *model;
+@property (strong, nonatomic) NSMutableArray *books;
 
 @end
 
 @implementation MBSBooksListViewController
+
+- (id)initWithBooks:(NSMutableArray *)books {
+    
+    if (self = [super init]) {
+        
+        _books = books;
+    }
+    
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,14 +50,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.model.count;
+    return self.books.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
+
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    if (cell==nil) {
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        
+    }
+    
+    NSString *fileName = [self.books objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = fileName;
     
     return cell;
 }
