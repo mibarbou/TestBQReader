@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) DBRestClient *restClient;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
 @property (strong, nonatomic) MBSBooksGridViewControllerCollectionViewController *gridViewController;
 @property (strong, nonatomic) MBSBooksListViewController *listViewController;
@@ -31,6 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.segmentedControl];
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(startDBRestClient) name:@"DBLinkedNotification" object:nil];
     
     [self startDBRestClient];
@@ -45,6 +48,43 @@
 - (void)dealloc {
     
     [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+- (IBAction)segmentedControlValueChanged:(UISegmentedControl*)sender {
+   
+    
+    if (sender.selectedSegmentIndex == 0) {
+        
+        [self.gridViewController.view removeFromSuperview];
+        [self.gridViewController removeFromParentViewController];
+        [self setupListViewController];
+   
+    } else {
+        
+        [self.listViewController.view removeFromSuperview];
+        [self.listViewController removeFromParentViewController];
+        [self setupGridViewController];
+
+    }
+    
+//    [oldViewController willMoveToParentViewController:nil];
+//    [self addChildViewController:newViewController];
+//    
+//    newViewController.view.frame = self.contentView.bounds;
+//    
+//    static const NSTimeInterval kDuration = 1 / 3.0;
+//    
+//    [UIView transitionWithView:self.contentView
+//                      duration:kDuration
+//                       options:(UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionCrossDissolve)
+//                    animations:^{
+//                        [oldViewController.view removeFromSuperview];
+//                        [self.contentView addSubview:newViewController.view];
+//                    }
+//                    completion:^(BOOL finished) {
+//                        [oldViewController removeFromParentViewController];
+//                        [newViewController didMoveToParentViewController:self];
+//                    }];
+    
 }
 
 #pragma mark - DBRestClientDelegate
@@ -80,6 +120,7 @@
     }
     
     [self setupListViewController];
+//    [self setupGridViewController];
 
     
 }
@@ -123,6 +164,25 @@ loadMetadataFailedWithError:(NSError *)error {
     [self.contentView addSubview:self.listViewController.view];
     
     [self.listViewController didMoveToParentViewController:self];
+ 
+}
+
+- (void)setupGridViewController {
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+    layout.itemSize = CGSizeMake(150, 200);
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+//    layout.minimumInteritemSpacing = 1;
+//    layout.minimumLineSpacing = 5;
+//    layout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
+//    layout.headerReferenceSize = CGSizeMake(30, 30);
+    
+    self.gridViewController = [[MBSBooksGridViewControllerCollectionViewController alloc]initWithBooks:self.books layout:layout];
+    [self addChildViewController:self.gridViewController];
+    self.gridViewController.view.frame = self.contentView.bounds;
+    [self.contentView addSubview:self.gridViewController.view];
+    
+    [self.gridViewController didMoveToParentViewController:self];
     
     
 }

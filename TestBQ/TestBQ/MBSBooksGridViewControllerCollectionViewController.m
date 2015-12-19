@@ -7,15 +7,26 @@
 //
 
 #import "MBSBooksGridViewControllerCollectionViewController.h"
+#import "BooksCollectionViewCell.h"
 
 @interface MBSBooksGridViewControllerCollectionViewController ()
 
-@property (strong, nonatomic) NSArray *model;
+@property (strong, nonatomic) NSMutableArray *books;
 
 
 @end
 
 @implementation MBSBooksGridViewControllerCollectionViewController
+
+- (id)initWithBooks:(NSMutableArray *)books layout:(UICollectionViewLayout*)layout{
+
+    if (self = [super initWithCollectionViewLayout:layout]) {
+        
+        _books = books;
+    }
+    
+    return self;
+}
 
 static NSString * const reuseIdentifier = @"Cell";
 
@@ -25,8 +36,10 @@ static NSString * const reuseIdentifier = @"Cell";
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    //leemos el nib
+    UINib *nib = [UINib nibWithNibName:@"BooksCollectionViewCell" bundle:nil];
+    // Lo registramos
+    [self.collectionView registerNib:nib forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
 }
@@ -50,19 +63,23 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     
-    return 0;
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return self.model.count;
+    return self.books.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+
+    BooksCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    // Configure the cell
+    NSString *fileName = [self.books objectAtIndex:indexPath.row];
+    
+    cell.nameLabel.text = fileName;
+    
     
     return cell;
 }

@@ -10,4 +10,6 @@
 
 @interface MBSBooksGridViewControllerCollectionViewController : UICollectionViewController
 
+- (id)initWithBooks:(NSMutableArray *)books layout:(UICollectionViewLayout*)layout;
+
 @end
