@@ -37,12 +37,10 @@ static NSString * const reuseIdentifier = @"Cell";
     
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
-    //leemos el nib
+    //Register nib for custom Item cell
     UINib *nib = [UINib nibWithNibName:@"BooksCollectionViewCell" bundle:nil];
-    // Lo registramos
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:reuseIdentifier];
     
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,6 +78,12 @@ static NSString * const reuseIdentifier = @"Cell";
     MBSBook *book = [self.books objectAtIndex:indexPath.row];
     
     cell.nameLabel.text = book.filename;
+    cell.sizeLabel.text = book.fileSize;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"dd/MM/YY"];
+    
+    cell.dateLabel.text = [NSString stringWithFormat:@"%@",[formatter stringFromDate:book.modifiedDate]];
     
     
     return cell;
@@ -89,7 +93,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    MBSBook *selectedBook = [self.books objectAtIndex:indexPath.row];
     
+    [self.delegate didSelectBookInCollectionView:selectedBook];
 }
 
 

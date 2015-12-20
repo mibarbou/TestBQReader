@@ -11,9 +11,12 @@
 #import "MBSBooksGridViewControllerCollectionViewController.h"
 #import "MBSBooksListViewController.h"
 #import "MBSBook.h"
+#import "MBSePubReaderViewController.h"
 
 
-@interface MBSHomeViewController ()<DBRestClientDelegate, UIActionSheetDelegate>
+
+
+@interface MBSHomeViewController ()<DBRestClientDelegate, UIActionSheetDelegate, MBSBooksListViewControllerDelegate, MBSBooksGridCollectionViewControllerDelegate>
 
 @property (nonatomic, strong) DBRestClient *restClient;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -26,10 +29,11 @@
 @property (strong, nonatomic) NSMutableArray *books;
 
 
-
 @end
 
 @implementation MBSHomeViewController
+
+#pragma mark - Life cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,6 +61,9 @@
     
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
+
+#pragma mark - SegmentedContro Action
+
 - (IBAction)segmentedControlValueChanged:(UISegmentedControl*)sender {
    
     
@@ -75,27 +82,10 @@
         [self setupGridViewController];
 
     }
-    
-//    [oldViewController willMoveToParentViewController:nil];
-//    [self addChildViewController:newViewController];
-//    
-//    newViewController.view.frame = self.contentView.bounds;
-//    
-//    static const NSTimeInterval kDuration = 1 / 3.0;
-//    
-//    [UIView transitionWithView:self.contentView
-//                      duration:kDuration
-//                       options:(UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionTransitionCrossDissolve)
-//                    animations:^{
-//                        [oldViewController.view removeFromSuperview];
-//                        [self.contentView addSubview:newViewController.view];
-//                    }
-//                    completion:^(BOOL finished) {
-//                        [oldViewController removeFromParentViewController];
-//                        [newViewController didMoveToParentViewController:self];
-//                    }];
-    
+  
 }
+
+#pragma mark - Ordering related methods
 
 - (void)orderBy {
     
@@ -103,7 +93,7 @@
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Date" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        [self sortBooksListByProperty:@"modifiedDate" ascendingOrder:YES];
+        [self sortBooksListByProperty:@"modifiedDate" ascendingOrder:NO];
         
         
     } ]];
@@ -149,7 +139,7 @@
         
     } else {
         
-        self.listViewController.books = self.books;
+        self.gridViewController.books = self.books;
         [self.gridViewController.collectionView reloadData];
     }
 }
@@ -173,6 +163,7 @@
                 
                 NSString *path  = [NSTemporaryDirectory() stringByAppendingPathComponent:file.filename];
                 NSFileManager *fileManager = [NSFileManager defaultManager];
+               
                 
                 if ([fileManager fileExistsAtPath:path]) {
                     // epub file is already in temp directory
@@ -204,13 +195,16 @@ loadMetadataFailedWithError:(NSError *)error {
 
 - (void)restClient:(DBRestClient *)client loadedFile:(NSString *)localPath
        contentType:(NSString *)contentType metadata:(DBMetadata *)metadata {
+    
     NSLog(@"File loaded into path: %@", localPath);
 
 }
 
 - (void)restClient:(DBRestClient *)client loadFileFailedWithError:(NSError *)error {
+    
     NSLog(@"There was an error loading the file: %@", error);
 }
+
 
 - (void)startDBRestClient {
     
@@ -227,10 +221,72 @@ loadMetadataFailedWithError:(NSError *)error {
     }
 }
 
+#pragma mark - MBSBooksListViewControllerDelegate
+
+- (void)didSelectBook:(MBSBook *)book {
+    
+    NSString *path  = [NSTemporaryDirectory() stringByAppendingPathComponent:book.filename];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    
+    if ([fileManager fileExistsAtPath:path]) {
+        // epub file is already in temp directory
+        
+        MBSePubReaderViewController *ePubVC = [[MBSePubReaderViewController alloc]initWithBook:book];
+        [self.navigationController pushViewController:ePubVC animated:YES];
+        
+    } else {
+        // show alert
+        UIAlertController *popAlert = [UIAlertController alertControllerWithTitle:@"Attention"
+                                                                          message:[NSString stringWithFormat:@"The selected book with filename -- %@ -- hasn't been download it yet, wait a moment and try again",book.filename]
+                                                                   preferredStyle:UIAlertControllerStyleAlert];
+        [popAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+        } ]];
+        
+        [self presentViewController:popAlert animated:YES completion:nil];
+    }
+   
+}
+
+#pragma mark - MBSBooksGridCollectionViewControllerDelegate
+
+-(void)didSelectBookInCollectionView:(MBSBook *)book {
+    
+    NSString *path  = [NSTemporaryDirectory() stringByAppendingPathComponent:book.filename];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    
+    if ([fileManager fileExistsAtPath:path]) {
+        // epub file is already in temp directory
+        
+        MBSePubReaderViewController *ePubVC = [[MBSePubReaderViewController alloc]initWithBook:book];
+        [self.navigationController pushViewController:ePubVC animated:YES];
+        
+    } else {
+        // show alert
+        UIAlertController *popAlert = [UIAlertController alertControllerWithTitle:@"Attention"
+                                                                          message:[NSString stringWithFormat:@"The selected book with filename -- %@ -- hasn't been download it yet, wait a moment and try again",book.filename]
+                                                                   preferredStyle:UIAlertControllerStyleAlert];
+        [popAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+        } ]];
+        
+        [self presentViewController:popAlert animated:YES completion:nil];
+        
+    }
+
+}
+
+
+#pragma mark - SettingUp childViewControllers Methods
+
 - (void)setupListViewController {
     
     self.listViewController = [[MBSBooksListViewController alloc]initWithBooks:self.books];
-    
+    self.listViewController.delegate = self;
     [self addChildViewController:self.listViewController];
     self.listViewController.view.frame = self.contentView.bounds;
     [self.contentView addSubview:self.listViewController.view];
@@ -250,6 +306,7 @@ loadMetadataFailedWithError:(NSError *)error {
 //    layout.headerReferenceSize = CGSizeMake(30, 30);
     
     self.gridViewController = [[MBSBooksGridViewControllerCollectionViewController alloc]initWithBooks:self.books layout:layout];
+    self.gridViewController.delegate = self;
     [self addChildViewController:self.gridViewController];
     self.gridViewController.view.frame = self.contentView.bounds;
     [self.contentView addSubview:self.gridViewController.view];

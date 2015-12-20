@@ -8,6 +8,7 @@
 
 #import "MBSBooksListViewController.h"
 #import "MBSBook.h"
+#import "BooksTableViewCell.h"
 
 @interface MBSBooksListViewController ()
 
@@ -26,6 +27,8 @@
     return self;
 }
 
+static NSString * const reuseIdentifier = @"Cell";
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,6 +40,10 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    //Register nib for custom Item cell
+    UINib *nib = [UINib nibWithNibName:@"BooksTableViewCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:reuseIdentifier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,17 +65,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    BooksTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell=[[BooksTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
         
     }
     
     MBSBook *book = [self.books objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = book.filename;
+    cell.nameLabel.text = book.filename;
+    cell.sizeLabel.text = book.fileSize;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"dd/MM/YY"];
+    
+    cell.dateLabel.text = [NSString stringWithFormat:@"%@",[formatter stringFromDate:book.modifiedDate]];
     
     return cell;
 }
@@ -78,14 +90,11 @@
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-//    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
+   
+    MBSBook *selectedBook = [self.books objectAtIndex:indexPath.row];
     
-    // Pass the selected object to the new view controller.
+    [self.delegate didSelectBook:selectedBook];
     
-    // Push the view controller.
-//    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 

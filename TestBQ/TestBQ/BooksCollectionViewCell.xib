@@ -14,18 +14,39 @@
                 <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eam-Pd-yur">
-                        <rect key="frame" x="14" y="126" width="128" height="66"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <rect key="frame" x="5" y="141" width="140" height="54"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tc-ci-8Pa">
+                        <rect key="frame" x="100" y="0.0" width="42" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="10"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4d-ht-gdx">
+                        <rect key="frame" x="4" y="0.0" width="42" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="10"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="images-2" translatesAutoresizingMaskIntoConstraints="NO" id="T5h-lt-fco">
+                        <rect key="frame" x="25" y="18" width="101" height="119"/>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="0.82745098039999998" green="0.83137254900000002" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="bookImageView" destination="T5h-lt-fco" id="gxc-BR-bEI"/>
+                <outlet property="dateLabel" destination="0tc-ci-8Pa" id="clM-Q2-gbs"/>
                 <outlet property="nameLabel" destination="Eam-Pd-yur" id="gmX-hA-vDw"/>
+                <outlet property="sizeLabel" destination="l4d-ht-gdx" id="D8h-w9-YVc"/>
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="images-2" width="102" height="102"/>
+    </resources>
 </document>
