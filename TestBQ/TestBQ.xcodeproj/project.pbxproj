@@ -14,6 +14,7 @@
 		D01D1FE41C21AF5500DB6B64 /* MBSBooksListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01D1FE21C21AF5500DB6B64 /* MBSBooksListViewController.xib */; };
 		D0347AB11C25E24E009E1AFD /* BooksCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0347AAF1C25E24E009E1AFD /* BooksCollectionViewCell.m */; };
 		D0347AB21C25E24E009E1AFD /* BooksCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0347AB01C25E24E009E1AFD /* BooksCollectionViewCell.xib */; };
+		D0347ABA1C269A11009E1AFD /* MBSBook.m in Sources */ = {isa = PBXBuildFile; fileRef = D0347AB91C269A11009E1AFD /* MBSBook.m */; };
 		D06157A21C208A6300C46E3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D06157A11C208A6300C46E3C /* main.m */; };
 		D06157A51C208A6300C46E3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D06157A41C208A6300C46E3C /* AppDelegate.m */; };
 		D06157A71C208A6300C46E3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D06157A61C208A6300C46E3C /* Assets.xcassets */; };
@@ -36,6 +37,8 @@
 		D0347AAE1C25E24E009E1AFD /* BooksCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksCollectionViewCell.h; sourceTree = "<group>"; };
 		D0347AAF1C25E24E009E1AFD /* BooksCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksCollectionViewCell.m; sourceTree = "<group>"; };
 		D0347AB01C25E24E009E1AFD /* BooksCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BooksCollectionViewCell.xib; sourceTree = "<group>"; };
+		D0347AB81C269A11009E1AFD /* MBSBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBSBook.h; sourceTree = "<group>"; };
+		D0347AB91C269A11009E1AFD /* MBSBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBSBook.m; sourceTree = "<group>"; };
 		D061579D1C208A6300C46E3C /* TestBQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestBQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D06157A11C208A6300C46E3C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D06157A31C208A6300C46E3C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -95,6 +98,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		D0347AB41C260BDB009E1AFD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0347AB81C269A11009E1AFD /* MBSBook.h */,
+				D0347AB91C269A11009E1AFD /* MBSBook.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		D06157941C208A6300C46E3C = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +131,7 @@
 		D061579F1C208A6300C46E3C /* TestBQ */ = {
 			isa = PBXGroup;
 			children = (
+				D0347AB41C260BDB009E1AFD /* Model */,
 				D0347AB31C25E254009E1AFD /* Views */,
 				D0765B921C20B29800EDCB58 /* Controllers */,
 				D06157A31C208A6300C46E3C /* AppDelegate.h */,
@@ -281,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D06157A51C208A6300C46E3C /* AppDelegate.m in Sources */,
+				D0347ABA1C269A11009E1AFD /* MBSBook.m in Sources */,
 				D06157A21C208A6300C46E3C /* main.m in Sources */,
 				D0765B961C20B2CC00EDCB58 /* MBSHomeViewController.m in Sources */,
 				D01D1FDE1C21AF2A00DB6B64 /* MBSBooksGridViewControllerCollectionViewController.m in Sources */,

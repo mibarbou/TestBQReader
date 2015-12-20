@@ -8,10 +8,9 @@
 
 #import "MBSBooksGridViewControllerCollectionViewController.h"
 #import "BooksCollectionViewCell.h"
+#import "MBSBook.h"
 
 @interface MBSBooksGridViewControllerCollectionViewController ()
-
-@property (strong, nonatomic) NSMutableArray *books;
 
 
 @end
@@ -35,6 +34,8 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
+    
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     
     //leemos el nib
     UINib *nib = [UINib nibWithNibName:@"BooksCollectionViewCell" bundle:nil];
@@ -76,9 +77,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
     BooksCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    NSString *fileName = [self.books objectAtIndex:indexPath.row];
+    MBSBook *book = [self.books objectAtIndex:indexPath.row];
     
-    cell.nameLabel.text = fileName;
+    cell.nameLabel.text = book.filename;
     
     
     return cell;

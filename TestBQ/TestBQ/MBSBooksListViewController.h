@@ -10,6 +10,9 @@
 
 @interface MBSBooksListViewController : UITableViewController
 
+@property (strong, nonatomic) NSMutableArray *books;
+
+
 - (id)initWithBooks:(NSMutableArray *)books;
 
 @end

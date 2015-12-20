@@ -10,13 +10,15 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "MBSBooksGridViewControllerCollectionViewController.h"
 #import "MBSBooksListViewController.h"
+#import "MBSBook.h"
 
 
-@interface MBSHomeViewController ()<DBRestClientDelegate>
+@interface MBSHomeViewController ()<DBRestClientDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) DBRestClient *restClient;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (strong, nonatomic) UIBarButtonItem *orderByButton;
 
 @property (strong, nonatomic) MBSBooksGridViewControllerCollectionViewController *gridViewController;
 @property (strong, nonatomic) MBSBooksListViewController *listViewController;
@@ -32,7 +34,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.title = @"Your eBooks";
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.segmentedControl];
+    
+    self.orderByButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(orderBy)];
+    self.orderByButton.title = @"order by";
+    self.navigationItem.rightBarButtonItem = self.orderByButton;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(startDBRestClient) name:@"DBLinkedNotification" object:nil];
     
@@ -56,12 +64,14 @@
         
         [self.gridViewController.view removeFromSuperview];
         [self.gridViewController removeFromParentViewController];
+        self.gridViewController = nil;
         [self setupListViewController];
    
     } else {
         
         [self.listViewController.view removeFromSuperview];
         [self.listViewController removeFromParentViewController];
+        self.listViewController = nil;
         [self setupGridViewController];
 
     }
@@ -87,6 +97,64 @@
     
 }
 
+- (void)orderBy {
+    
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Order your books by:" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Date" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self sortBooksListByProperty:@"modifiedDate" ascendingOrder:YES];
+        
+        
+    } ]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Name" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self sortBooksListByProperty:@"filename" ascendingOrder:YES];
+        
+        
+    } ]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Size" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self sortBooksListByProperty:@"fileSize" ascendingOrder:NO];
+        
+        
+    } ]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+    } ]];
+    
+    // show action sheet
+    actionSheet.popoverPresentationController.barButtonItem = self.orderByButton;
+    actionSheet.popoverPresentationController.sourceView = self.view;
+    [self presentViewController:actionSheet animated:YES completion:nil];
+    
+}
+
+-(void)sortBooksListByProperty:(NSString*)propertyName ascendingOrder:(BOOL)ascendingOrder{
+    
+    NSSortDescriptor *firstDescriptor = [NSSortDescriptor sortDescriptorWithKey:propertyName ascending:ascendingOrder];
+    NSArray *sortsDescriptors = [NSArray arrayWithObjects:firstDescriptor, nil];
+    NSArray *sortedArray = [self.books sortedArrayUsingDescriptors:sortsDescriptors];
+    self.books = sortedArray.mutableCopy;
+    
+    
+    if ([[[self childViewControllers]lastObject]isKindOfClass:[MBSBooksListViewController class]]) {
+        
+        self.listViewController.books = self.books;
+        [self.listViewController.tableView reloadData];
+        
+    } else {
+        
+        self.listViewController.books = self.books;
+        [self.gridViewController.collectionView reloadData];
+    }
+}
+
+
 #pragma mark - DBRestClientDelegate
 
 - (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata {
@@ -103,24 +171,28 @@
                 
                 NSLog(@"EBOOK: %@",file.filename);
                 
-                NSString *path;
-                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                path = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/",file.filename]];
+                NSString *path  = [NSTemporaryDirectory() stringByAppendingPathComponent:file.filename];
+                NSFileManager *fileManager = [NSFileManager defaultManager];
                 
+                if ([fileManager fileExistsAtPath:path]) {
+                    // epub file is already in temp directory
+             
+                } else {
+                    
+                    [self.restClient loadFile:file.path intoPath:path];
+                }
                 
-//                [self.restClient loadFile:file.path intoPath:path];
+                MBSBook *book = [[MBSBook alloc]initWithFilename:file.filename
+                                                    modifiedDate:file.lastModifiedDate
+                                                        fileSize:file.humanReadableSize];
                 
-                
-                NSLog(@"hash: %@",file.icon);
-                
-                [self.books addObject:file.filename];
-               
+                [self.books addObject:book];
+         
             }
         }
     }
     
     [self setupListViewController];
-//    [self setupGridViewController];
 
     
 }
@@ -143,9 +215,9 @@ loadMetadataFailedWithError:(NSError *)error {
 - (void)startDBRestClient {
     
     if (![[DBSession sharedSession] isLinked]) {
+        
         [[DBSession sharedSession] linkFromController:self];
-        
-        
+      
     } else {
         
         self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
@@ -172,9 +244,9 @@ loadMetadataFailedWithError:(NSError *)error {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.itemSize = CGSizeMake(150, 200);
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-//    layout.minimumInteritemSpacing = 1;
-//    layout.minimumLineSpacing = 5;
-//    layout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
+    layout.minimumInteritemSpacing = 4;
+    layout.minimumLineSpacing = 14;
+    layout.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8);
 //    layout.headerReferenceSize = CGSizeMake(30, 30);
     
     self.gridViewController = [[MBSBooksGridViewControllerCollectionViewController alloc]initWithBooks:self.books layout:layout];

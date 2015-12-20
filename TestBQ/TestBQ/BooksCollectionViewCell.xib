@@ -22,7 +22,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.82745098039999998" green="0.83137254900000002" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="nameLabel" destination="Eam-Pd-yur" id="gmX-hA-vDw"/>
             </connections>

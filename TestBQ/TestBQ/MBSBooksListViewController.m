@@ -7,10 +7,10 @@
 //
 
 #import "MBSBooksListViewController.h"
+#import "MBSBook.h"
 
 @interface MBSBooksListViewController ()
 
-@property (strong, nonatomic) NSMutableArray *books;
 
 @end
 
@@ -35,6 +35,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,9 +66,9 @@
         
     }
     
-    NSString *fileName = [self.books objectAtIndex:indexPath.row];
+    MBSBook *book = [self.books objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = fileName;
+    cell.textLabel.text = book.filename;
     
     return cell;
 }
